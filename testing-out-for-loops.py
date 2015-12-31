@@ -21,12 +21,12 @@ class tree(object):
     def getChildren(self):
         return self.children  
           
-"""    def __str__(self, level=0):
+    def __str__(self, level=0):
         ret = "\t"*level+str(self.name)+"\n"
         for child in self.children:
             ret += child.__str__(level+1)
         return ret
-        """
+        
                         
 def depthFirst(tree, name):
     """Finds the node - name in the tree.
@@ -66,13 +66,17 @@ def breadthFirst(tree, name):
 
 def depthFirstR(tree,name):
     queue = [tree]
+    result = None
     for item in queue:
         print "Now Searching: ", item.getName()
         if item.getName() == name:
-            return item      
+            return item
         else:
             for child in item.getChildren():
-                depthFirstR(child, name)
+                if depthFirstR(child, name) != None:
+                    result = child
+    return result
+    
 
     
 
@@ -103,27 +107,27 @@ def BFR(tree,name):
     else:
         queue = [tree]
     children = []
+
     for item in queue:
         print "Now Searching: ", item.getName()
         if item.getName() == name:
-            print item.getName()
             return item
         else:
             children.append(item.getChildren())
+
+    return BFR(children,name)
     
-    BFR(children, name)
-    
-    
+
 
 
 
 T1 = tree("a", [tree("b", [tree("d"),tree("e"),tree("f")]), tree("c", [tree("g", [tree("h")])])])
 
-print BFR(T1, "e")
+#print BFR(T1, "h")
 
 #print breadthFirst(T1, "h")
 
-print depthFirstR(T1, "h")
+print depthFirstR(T1, "d")
 
 #print depthFirst(T1, "h")
 
