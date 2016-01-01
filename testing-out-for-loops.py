@@ -66,41 +66,20 @@ def breadthFirst(tree, name):
 
 def depthFirstR(tree,name):
     queue = [tree]
-    result = None
     for item in queue:
         print "Now Searching: ", item.getName()
         if item.getName() == name:
             return item
         else:
             for child in item.getChildren():
-                if depthFirstR(child, name) != None:
-                    result = child
-    return result
-    
+                result = depthFirstR(child,name)
+                if result != None:
+                    return result
+                    
 
     
 
-def breadthFirstR(tree,name):
-    queue = [tree]
-    listT = []
-    children = []
-    for item in queue:
-        if type(item) == list:
-            for node in item:
-                listT.append(node)
-        else:
-            listT.append(item)
-            
-    for item in listT:
-
-        print "Now Searching: ", item.getName()
-        if item.getName() == name:
-            return item
-        for child in item.getChildren():
-            children.append(child)
     
-    breadthFirstR(children,name)
-                
 def BFR(tree,name):
     if type(tree) == list:
         queue = list(chain.from_iterable(tree))
@@ -123,15 +102,15 @@ def BFR(tree,name):
 
 T1 = tree("a", [tree("b", [tree("d"),tree("e"),tree("f")]), tree("c", [tree("g", [tree("h")])])])
 
-#print BFR(T1, "h")
+print BFR(T1, "h")
 
 #print breadthFirst(T1, "h")
 
-print depthFirstR(T1, "d")
+#print depthFirstR(T1, "z")
 
 #print depthFirst(T1, "h")
 
-#print T1
+print T1
 
 
 
